@@ -1,0 +1,50 @@
+<!-- <div class="col-md-4 offset-4 mt-3 mb-3">
+    <input type="search" name="search" class="form-control" [(ngModel)]='search'
+        placeholder="Enter Product to search..">
+</div> -->
+
+<div class="alert alert-danger" *ngIf='message'>{{message}}
+    <span class="float-right">
+        <button (click)='deleteMessage()'>&times;</button>
+    </span>
+</div>
+
+<div class="col-md-2 float-left mt-3 ml-1" *ngFor='let product of products'>
+    <div class="card">
+        <div class="card-header">
+            Medicine Name: {{product.productName | uppercase}}
+        </div>
+
+        <div class="card-body">
+            <img [src]='product.productImageUrl' alt="product image" height="100px" width="100px">
+            <p>Price: {{product.productPrice | currency: 'INR'}}</p>
+            <p>Stock: {{product.productQuantity}}</p>
+            <p>Expiry Date: {{product.expiryDate}}</p>
+        </div>
+
+        <div class="card-footer" *ngIf='isAdmin() || isSeller()' >
+            <div class="btn-group col-md-12" >
+                <button class="btn btn-outline-success" (click)='selectProduct(product)'>
+                    Update
+                </button>
+
+                <button class="btn btn-outline-dark" (click)='deleteProduct(product)'>
+                    Delete
+                </button>
+            </div>
+        </div>
+
+        <div class="card-footer" *ngIf='!(isAdmin() || isSeller())' >
+            <div class="btn-group col-md-12" >
+                <button class="btn btn-outline-success" (click)='addToCart(product)'>
+                    Add To Cart
+                </button>
+
+                <button class="btn btn-outline-dark" (click)='deleteProduct(product)'>
+                   Quantity
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

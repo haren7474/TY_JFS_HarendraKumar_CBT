@@ -1,0 +1,53 @@
+<div class="alert alert-danger" *ngIf='error'>
+    {{error}}
+</div>
+<div class="alert alert-success" *ngIf='message'>
+    {{message}}
+</div>
+<div class='col-md-3 offset-md-4 mt-4'>
+    <form #addProductForm='ngForm' (ngSubmit)='addProduct(addProductForm)'>
+       
+        <div class="form-group">
+            <label for="productName">Product Name</label>
+            <input type="text" name="productName" id="productName" #productName='ngModel' ngModel class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="productPrice">Product Cost</label>
+            <input type="text" name="productPrice" id="productPrice" #productPrice='ngModel' ngModel class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="productQuantity">Product Quantity</label>
+            <input type="text" name="productQuantity" id="productQuantity" #productQuantity='ngModel' ngModel class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="productComments">Product Comments</label>
+            <input type="text" name="productComments" id="productComments" #productComments='ngModel' ngModel class="form-control" required>
+        </div> 
+
+        <div class="form-group" ngModelGroup="userBean">
+            <label for="userId"> Product Owner</label>
+            <select name="userId" id="userId" #userId='ngModel' ngModel class="form-control">
+                <option *ngFor='let user of users' value="{{user.userId}}" >
+                    Name: {{ user.fullName}} | Email: {{user.email}} 
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="productImageUrl">Product Image URL</label>
+            <input type="text" name="productImageUrl" id="productImageUrl" #productImageUrl='ngModel' ngModel class="form-control"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label>Expiry Date</label>
+            <input type="date" class="form-control" id="expiryDate" name="expiryDate" placeholder="Expiry Date" #expiryDate='ngModel' ngModel class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary float-right">Add Product</button>
+
+    </form>
+</div>

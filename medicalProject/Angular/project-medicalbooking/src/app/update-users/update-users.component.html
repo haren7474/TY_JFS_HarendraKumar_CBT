@@ -1,0 +1,75 @@
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+<div class='col-md-3 offset-md-4 mt-4'>
+    <div class="card">
+        <div class="card-header">
+            <h4>Update User</h4>
+        </div>
+
+        <div class="card-body">
+
+            <form #editForm='ngForm' (ngSubmit)='updateUser(editForm)'>
+
+                <input type="hidden" name="userId" id="userId" #userId='ngModel' class="form-control"
+                    [(ngModel)]='userService.selectedUserToUpdate.userId'>
+
+
+                <div class="form-group">
+                    <label for="userName">User Name</label>
+                    <input type="text" name="userName" id="userName" #fullName='ngModel' class="form-control"
+                        [(ngModel)]='userService.selectedUserToUpdate.userName' required>
+                </div>
+
+                <div class="form-group">
+                    <label for="streetAdd1">Street Add1</label>
+                    <input type="text" name="streetAdd1" id="streetAdd1" #streetAdd1='ngModel' class="form-control"
+                        [(ngModel)]='userService.selectedUserToUpdate.streetAdd1' required>
+                </div>
+
+                <div class="form-group">
+                    <label for="streetAdd2">Street Add2</label>
+                    <input type="text" name="streetAdd2" id="streetAdd2" #streetAdd2='ngModel' class="form-control"
+                        [(ngModel)]='userService.selectedUserToUpdate.streetAdd2' required>
+                </div>
+
+                <div class="form-group">
+                    <label for="userImageUrl">User Image URL</label>
+                    <input type="text" name="userImageUrl" id="userImageUrl" #useImageUrl='ngModel' class="form-control"
+                        [(ngModel)]='userService.selectedUserToUpdate.userImageUrl' required>
+                </div>
+
+                <div class="form-group">
+                    <label for="town">Town</label>
+                    <input type="text" name="town" id="town" #town='ngModel' class="form-control"
+                        [(ngModel)]='userService.selectedUserToUpdate.town' required>
+                </div>
+
+                <div class="form-group">
+                    <label for="postalCode">Postal Code</label>
+                    <input type="text" name="postalCode" id="postalCode" #postalCode='ngModel' class="form-control"
+                        [(ngModel)]='userService.selectedUserToUpdate.postalCode' required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" #email='ngModel' class="form-control"
+                        [(ngModel)]='userService.selectedUserToUpdate.email' required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobileNumber">Mobile</label>
+                    <input type="text" name="mobileNumber" id="mobileNumber" #streetAdd2='ngModel' class="form-control"
+                        [(ngModel)]='userService.selectedUserToUpdate.mobileNumber' required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" #password='ngModel' class="form-control"
+                        [(ngModel)]='userService.selectedUserToUpdate.password' required>
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-outline-primary">Update User</button>
+                </div>
+            </form>
+        </div>
+    </div>
