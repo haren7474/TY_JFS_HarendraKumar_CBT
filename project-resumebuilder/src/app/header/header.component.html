@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" >
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCtIXaORWDBgu5IOg0iSLPWppSacdQvxojiFrFkuyyVE3tQIPqhA&s"
+        class="rounded-circle z-depth-0" alt="avatar image" height="45">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="#">Home
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf='isAdmin()' routerLink="users">Users</a>
+            </li>
+           
+
+            <li class="nav-item">
+                <a class="nav-link"  *ngIf='isUser()' routerLink="personalDetails">Build New Resume</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="aboutUs">About Us</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="contactUs">Contact Us</a>
+            </li>
+
+       
+
+        </ul>
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+
+            <span class="nav-link text-dark" *ngIf='currentUser'> Welcome: {{currentUser}} (Role:
+                {{yourRole | titlecase}})</span>
+
+            <li class="nav-item">
+                <a class="nav-link" *ngIf='isLoggedIn() && isUser()' routerLink="#">View Your Resume</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" *ngIf='isLoggedIn()  && isUser()' routerLink="#">Edit Your Resume</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" *ngIf='!isLoggedIn()' routerLink="addUser">Register</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" *ngIf='!isLoggedIn()' routerLink="login">Login</a>
+
+            </li>
+
+            <li class="nav-item" >
+                <a class="nav-link" *ngIf='isLoggedIn()' (click)='logout()'>Logout</a>
+            </li>
+         
+            <li class="nav-item avatar dropdown " *ngIf='isLoggedIn()'>
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <img src="https://bit.ly/2TBIWUC" class="rounded-circle z-depth-0" alt="avatar image" height="35" width="35">
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                    aria-labelledby="navbarDropdownMenuLink-55">
+                    <a class="dropdown-item" routerLink="#">Change Password</a>
+                    <a class="dropdown-item" routerLink="#">Change Image</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
