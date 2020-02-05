@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from './product';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ShoppingCart } from './shoppingcart';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 export class ProductService {
 
   selectedProductToUpdate: Product;
-
+  
   api = 'http://localhost:8080/medicalbookingboot';
 
   constructor(private http: HttpClient) { }

@@ -1,1 +1,65 @@
-<p>update-product works!</p>
+<div class="alert alert-success" *ngIf='message'>{{message}}</div>
+
+<div class='col-md-3 offset-md-2 float-left mt-4'>
+    <h4 class="text-center text-secondary">You are updating</h4>
+    <div class="card-header">
+        <img [src]='productService.selectedProductToUpdate.productImageUrl' alt="product image" height="300px"
+            width="200px">
+    </div>
+</div>
+
+<div class='col-md-3 offset-md-6 mt-4'>
+    <h4 class="text-center text-secondary">Enter Updates</h4>
+
+    <form #editForm='ngForm' (ngSubmit)='updateProduct(editForm)'>
+
+        <input type="hidden" name="productId" id="productId" #productId='ngModel' class="form-control"
+            [(ngModel)]='productService.selectedProductToUpdate.productId'>
+
+        <div class="form-group">
+            <label for="productName">Product Name</label>
+            <input type="text" name="productName" id="productName" #productName='ngModel' class="form-control"
+                [(ngModel)]='productService.selectedProductToUpdate.productName' >
+        </div>
+
+        <div class="form-group">
+            <label for="productPrice">Product Cost</label>
+            <input type="text" name="productPrice" id="productPrice" #productPrice='ngModel' class="form-control"
+                [(ngModel)]='productService.selectedProductToUpdate.productPrice' >
+        </div>
+
+        <div class="form-group">
+            <label for="productQuantity">Product Quantity</label>
+            <input type="text" name="productQuantity" id="productQuantity" #productQuantity='ngModel'
+                class="form-control" [(ngModel)]='productService.selectedProductToUpdate.productQuantity' >
+        </div>
+
+        <div class="form-group">
+            <label for="productComments">Product Comments</label>
+            <input type="text" name="productComments" id="productComments" #productComments='ngModel'
+                class="form-control" [(ngModel)]='productService.selectedProductToUpdate.productComments' >
+        </div>
+
+        <div class="form-group">
+            <label for="productImageUrl">Product Image URL</label>
+            <input type="text" name="productImageUrl" id="productImageUrl" #productImage='ngModel' class="form-control"
+                [(ngModel)]='productService.selectedProductToUpdate.productImageUrl' >
+        </div>
+
+        <div class="form-group">
+            <label>Expiry Date</label>
+            <input type="date" class="form-control" id="expiryDate" name="expiryDate" placeholder="Expiry Date" #expiryDate='ngModel' 
+            [(ngModel)]='productService.selectedProductToUpdate.expiryDate' class="form-control">
+        </div>
+
+        <div class="form-group" ngModelGroup="userBean">
+            <label for="userId"> Product Owner</label>
+            <select name="userId" id="userId" #userId='ngModel' [(ngModel)]='currentUser.userId' class="form-control">
+                <option selected disabled>---Select New Owner---</option>
+                <option disabled >Current Owner- Name: {{currentUser.userName}} | Email: {{currentUser.email}}</option>
+                <option *ngFor='let user of users' value="{{user.userId}}">Name: {{ user.userName}} | Email: {{user.email}}</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-outline-primary float-right">Update Product</button>
+    </form>
+</div>

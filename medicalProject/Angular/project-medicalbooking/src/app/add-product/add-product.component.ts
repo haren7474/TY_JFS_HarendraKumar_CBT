@@ -3,6 +3,7 @@ import { User } from '../users';
 import { ProductService } from '../product.service';
 import { UsersService } from '../users.service';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-product',
@@ -11,11 +12,9 @@ import { NgForm } from '@angular/forms';
 })
 export class AddProductComponent implements OnInit {
 
-  message: string;
-  statusCode: number;
   error: string;
   users: User[];
-  constructor(private productService: ProductService, private userService: UsersService) {
+  constructor(private productService: ProductService, private userService: UsersService, private router: Router) {
     this.getOwnerUsers();
   }
 
@@ -23,7 +22,14 @@ export class AddProductComponent implements OnInit {
     this.userService.getData().subscribe(response => {
       console.log(response);
       this.users = response.userBean.filter((user, index) => {
-        return user.userType.toLowerCase() === 'seller';
+
+
+        let userDetails = JSON.parse(localStorage.getItem('userDetails'));
+        if (userDetails && userDetails.userBean[0].userType === 'seller') {
+          return user.userId === userDetails.userBean[0].userId;
+        } else {
+          return user.userType.toLowerCase() === 'seller';
+        }
       });
     });
   }
@@ -31,19 +37,16 @@ export class AddProductComponent implements OnInit {
   addProduct(form: NgForm) {
     this.productService.postData(form.value).subscribe(data => {
       console.log(data);
-      if (this.statusCode === 201) {
-        this.message = data.description;
-        form.reset();
+      if (data.statusCode === 201) {
+        this.router.navigateByUrl('/products');
       } else {
         this.error = data.description;
+        setTimeout(() => {
+          this.error = null;
+        }, 2000);
       }
-      setTimeout(() => {
-        this.error = null;
-        this.message = null;
-      }, 2000);
     });
   }
-
 
   ngOnInit() {
   }

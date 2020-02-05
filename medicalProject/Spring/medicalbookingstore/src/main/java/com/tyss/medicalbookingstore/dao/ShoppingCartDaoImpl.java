@@ -23,6 +23,8 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
 	@Override
 	public List<ShoppingCartBean> viewCart(int userId) {
+		
+		System.out.println("viewCart Dao invoked");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		String jpql = "from ShoppingCartBean where userId=: userId";
 		Query query = entityManager.createQuery(jpql);

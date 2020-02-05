@@ -3,13 +3,19 @@
         placeholder="Enter Product to search..">
 </div> -->
 
-<div class="alert alert-danger" *ngIf='message'>{{message}}
+<div class="alert alert-success" *ngIf='message'>{{message}}
     <span class="float-right">
         <button (click)='deleteMessage()'>&times;</button>
     </span>
 </div>
 
-<div class="col-md-2 float-left mt-3 ml-1" *ngFor='let product of products'>
+<div class="alert alert-danger" *ngIf='error'>{{error}}
+    <span class="float-right">
+        <button (click)='deleteMessage()'>&times;</button>
+    </span>
+</div>
+
+<div class="col-md-2 float-left mt-3 ml-3" *ngFor='let product of products'>
     <div class="card">
         <div class="card-header">
             Medicine Name: {{product.productName | uppercase}}
@@ -22,8 +28,8 @@
             <p>Expiry Date: {{product.expiryDate}}</p>
         </div>
 
-        <div class="card-footer" *ngIf='isAdmin() || isSeller()' >
-            <div class="btn-group col-md-12" >
+        <div class="card-footer" *ngIf='isAdmin() || isSeller()'>
+            <div class="btn-group col-md-12">
                 <button class="btn btn-outline-success" (click)='selectProduct(product)'>
                     Update
                 </button>
@@ -34,17 +40,17 @@
             </div>
         </div>
 
-        <div class="card-footer" *ngIf='!(isAdmin() || isSeller())' >
-            <div class="btn-group col-md-12" >
-                <button class="btn btn-outline-success" (click)='addToCart(product)'>
-                    Add To Cart
-                </button>
+        <div class="card-footer" *ngIf='!(isAdmin() || isSeller())'>
+            <div class="btn-group col-md-12">
 
-                <button class="btn btn-outline-dark" (click)='deleteProduct(product)'>
-                   Quantity
-                </button>
+                <div class="input-group">
+                    <input type="number" class="form-control" #count='ngModel' ngModel style="text-align:center;" min="1" max= {{product.productQuantity}} onchange="sendCount(count)">
+                    
+                    <button class="btn btn-outline-primary ml-3" (click)='addToCart(product, count.value)' [disabled] = "buttonDisabled" >
+                        Add To Cart
+                    </button>
+                </div>
             </div>
         </div>
-
     </div>
 </div>

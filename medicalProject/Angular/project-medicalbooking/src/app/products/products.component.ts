@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { Router } from '@angular/router';
 import { ProductService } from '../product.service';
+import { NgForm } from '@angular/forms';
+import { ShoppingcartService } from '../shoppingcart.service';
 
 @Component({
   selector: 'app-products',
@@ -13,10 +15,23 @@ export class ProductsComponent implements OnInit {
   message: string;
   statusCode: number;
   description: string;
+  error: string;
+  buttonDisabled: boolean;
+  inputQuantity: number;
+
+  // onIncrement(): void {
+  //   this.count += 1;
+  //   }
+
+  //   onDecrement(): void {
+  //   this.count -= 1;
+  //   }
+
 
   products: Product[];
 
   constructor(private productService: ProductService,
+    private shoppingcartService: ShoppingcartService,
     private router: Router) {
     this.getProducts();
   }
@@ -36,8 +51,9 @@ export class ProductsComponent implements OnInit {
       if (res.statusCode === 201) {
         this.products.splice(this.products.indexOf(product), 1);
         this.statusCode = res.statusCode;
-      } else {
         this.message = res.description;
+      } else {
+        this.error = res.description;
       }
     });
   }
@@ -78,7 +94,34 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+  addToCart(product: Product, count: number) {
+    product.productQuantity = count;
+    this.inputQuantity = count;
+    this.shoppingcartService.addCartData(product).subscribe(data => {
+      console.log(data);
+      if (data.statusCode === 201) {
+        this.message = data.description;
+      } else {
+        this.error = data.description;
+      }
+      setTimeout(() => {
+        this.error = null;
+        this.message == null;
+      }, 2000);
+    });
+  }
+
+  sendCount(count) {
+    console.log(count);
+  }
   ngOnInit() {
+    // if(this.inputQuantity>0) {
+    // this.buttonDisabled = true;
+    // } else {
+    //   this.buttonDisabled = false;
+    // }
+    this.buttonDisabled = false;
+    
   }
 
 }

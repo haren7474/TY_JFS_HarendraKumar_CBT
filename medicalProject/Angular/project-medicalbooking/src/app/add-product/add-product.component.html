@@ -1,9 +1,7 @@
 <div class="alert alert-danger" *ngIf='error'>
     {{error}}
 </div>
-<div class="alert alert-success" *ngIf='message'>
-    {{message}}
-</div>
+
 <div class='col-md-3 offset-md-4 mt-4'>
     <form #addProductForm='ngForm' (ngSubmit)='addProduct(addProductForm)'>
        
@@ -31,7 +29,7 @@
             <label for="userId"> Product Owner</label>
             <select name="userId" id="userId" #userId='ngModel' ngModel class="form-control">
                 <option *ngFor='let user of users' value="{{user.userId}}" >
-                    Name: {{ user.fullName}} | Email: {{user.email}} 
+                    Name: {{ user.userName}} | Email: {{user.email}} 
                 </option>
             </select>
         </div>
