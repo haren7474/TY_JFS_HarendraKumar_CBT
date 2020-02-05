@@ -1,0 +1,142 @@
+<div id="contentToConvert">
+  <div class="mycontainer border groove mt-4" style="width:60%;margin:auto">
+    <div class="row">
+      <div class="col col-md-6">
+        <div class="col col-md-8 offset-md-2  mt-3">
+          <div class="h4" style="color: darkblue;">{{resumeFormdata.firstName}} {{resumeFormdata.middleName}}
+            {{resumeFormdata.lastName}} </div>
+          <div class="h6 " style="color: coral;">{{resumeFormdata.graduationDegree}} ({{resumeFormdata.degreeBranch}})
+          </div>
+          <div class="h5 " style="color: darkblue;">Total Exp: {{resumeFormdata.totalExperience}} Years </div>
+          <div class="h5 " style="color: darkblue;">Relavent Exp: {{resumeFormdata.relaventExperience}} Years </div>
+        </div>
+      </div>
+
+
+      <div class="col col-md-6  ">
+        <img src="assets/tysslogo.JPG" alt="tyss logo"
+          style="height:132px; width:400px;margin-top:11px; margin-left: 50px;">
+      </div>
+    </div>
+    <hr style="background-color: rgb(160, 160, 236); height: 3px;">
+
+    <div class="col col-md-10 offset-md-1 mt-3">
+      <div class="h4" style="color: white; background-color: rgb(41, 41, 138);padding: 6px;"> Summary </div>
+      <ul>
+        <li *ngFor='let summary of resumeFormdata.summaries'>{{summary}}</li>
+      </ul>
+    </div>
+
+    <div class="col col-md-10 offset-md-1 mt-3">
+      <div class="h4" style="color: white; background-color: rgb(41, 41, 138);padding: 6px;"> Technical Skills </div>
+
+      <table class="table">
+        <tbody>
+
+          <tr *ngIf='resumeFormdata.languages'>
+            <th scope="row">Languages</th>
+            <td>{{resumeFormdata.languages}}</td>
+          </tr>
+          <hr>
+
+          <tr *ngIf='resumeFormdata.javaEE' class="mystyle">
+            <th scope="row">J2EE Technologies</th>
+            <td>{{resumeFormdata.javaEE}}</td>
+          </tr>
+          <hr>
+
+          <tr *ngIf='resumeFormdata.frontEndFramework' class="mystyle">
+            <th scope="row">Frameworks - Front End</th>
+            <td>{{resumeFormdata.frontEndFramework}}</td>
+          </tr>
+          <hr>
+
+          <tr *ngIf='resumeFormdata.backEndFramework' class="mystyle">
+            <th scope="row">Frameworks - Back End</th>
+            <td>{{resumeFormdata.backEndFramework}}</td>
+          </tr>
+          <hr>
+
+          <tr *ngIf='resumeFormdata.designPatterns' class="mystyle">
+            <th scope="row">Design Patterns</th>
+            <td>{{resumeFormdata.designPatterns}}</td>
+          </tr>
+          <hr>
+
+          <tr *ngIf='resumeFormdata.rdbsApplications' class="mystyle">
+            <th scope="row">RDBS Applications </th>
+            <td>{{resumeFormdata.rdbsApplications}}</td>
+          </tr>
+          <hr>
+
+          <tr *ngIf='resumeFormdata.webServers' class="mystyle">
+            <th scope="row">Web Servers </th>
+            <td>{{resumeFormdata.webServers}}</td>
+          </tr>
+          <hr>
+
+          <tr *ngIf='resumeFormdata.aws'>
+            <th scope="row">AWS </th>
+            <td>{{resumeFormdata.aws}}</td>
+          </tr>
+          <hr>
+
+          <tr *ngIf='resumeFormdata.codeQualityTools'>
+            <th scope="row">Code Quality Tools </th>
+            <td>{{resumeFormdata.codeQualityTools}}</td>
+          </tr>
+          <hr>
+
+          <tr *ngIf='resumeFormdata.versionControlSystem'>
+            <th scope="row"> Version Control System </th>
+            <td>{{resumeFormdata.versionControlSystem}}</td>
+          </tr>
+          <hr>
+
+          <tr *ngIf='resumeFormdata.buildAutomationTool'>
+            <th scope="row"> Build Automation Tool</th>
+            <td>{{resumeFormdata.buildAutomationTool}}</td>
+          </tr>
+          <hr>
+
+          <tr *ngIf='resumeFormdata.cicdTool'>
+            <th scope="row"> CI/CD Tool </th>
+            <td>{{resumeFormdata.cicdTool}}</td>
+          </tr>
+          <hr>
+
+          <tr *ngIf='resumeFormdata.otherTools'>
+            <th scope="row"> Other Tools </th>
+            <td>{{resumeFormdata.otherTools}}</td>
+          </tr>
+          <hr>
+
+          <tr *ngIf='resumeFormdata.sdlc'>
+            <th scope="row"> Software Development Processes (SDLC) </th>
+            <td>{{resumeFormdata.sdlc}}</td>
+          </tr>
+          <hr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col col-md-10 offset-md-1 mt-3">
+      <div class="h4" style="color: white; background-color: rgb(41, 41, 138);padding: 6px;"> Achievements </div>
+      <ul>
+        <li *ngFor='let achievement of resumeFormdata.achievements'>{{achievement}}</li>
+      </ul>
+    </div>
+
+    <div class="col col-md-10 offset-md-1 mt-3">
+      <div class="h4" style="color: white; background-color: rgb(41, 41, 138);padding: 6px;"> Projects </div>
+
+    </div>
+
+
+
+  </div>
+</div>
+<div>
+  <button type="submit" class="btn btn-outline-primary float-right" (click)="generatePDF()">Export To PDF</button>
+</div>

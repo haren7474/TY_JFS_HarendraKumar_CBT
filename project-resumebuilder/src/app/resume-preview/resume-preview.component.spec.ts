@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddUsersComponent } from './add-users.component';
+import { ResumePreviewComponent } from './resume-preview.component';
 
-describe('AddUsersComponent', () => {
-  let component: AddUsersComponent;
-  let fixture: ComponentFixture<AddUsersComponent>;
+describe('ResumePreviewComponent', () => {
+  let component: ResumePreviewComponent;
+  let fixture: ComponentFixture<ResumePreviewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddUsersComponent ]
+      declarations: [ ResumePreviewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddUsersComponent);
+    fixture = TestBed.createComponent(ResumePreviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "project-medicalbooking": {
+    "tyss-resumebuilder": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/project-medicalbooking",
+            "outputPath": "dist/tyss-resumebuilder",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "project-medicalbooking:build"
+            "browserTarget": "tyss-resumebuilder:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "project-medicalbooking:build:production"
+              "browserTarget": "tyss-resumebuilder:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "project-medicalbooking:build"
+            "browserTarget": "tyss-resumebuilder:build"
           }
         },
         "test": {
@@ -115,15 +115,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "project-medicalbooking:serve"
+            "devServerTarget": "tyss-resumebuilder:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "project-medicalbooking:serve:production"
+              "devServerTarget": "tyss-resumebuilder:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "project-medicalbooking"
+  "defaultProject": "tyss-resumebuilder"
 }

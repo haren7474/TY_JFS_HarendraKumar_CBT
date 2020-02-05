@@ -1,0 +1,277 @@
+<div class="alert alert-danger" *ngIf='error'>
+    {{error}}
+</div>
+
+<div class="alert alert-success" *ngIf='message'>{{message}}
+    <span class="float-right">
+        <button (click)='deleteMessage()'>&times;</button>
+    </span>
+</div>
+
+
+<div class='col-md-3 offset-md-3 mt-4'>
+    <form [formGroup]='registerForm' (ngSubmit)='submitForm()'>
+        <div class="card">
+            <div class="card-header">
+                <h4>Provide below details</h4>
+            </div>
+
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" id="firstName" formControlName='firstName' class="form-control">
+                    <div class="text-danger" *ngIf='firstName.touched && firstName.invalid'>
+                        <div *ngIf='firstName.errors.required'>*This field is mandatory</div>
+                        <div *ngIf='firstName.errors.pattern'>*First Name can only have alphabets with lenth 3-15</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="middleName">Middle Name</label>
+                    <input type="text" name="middleName" id="middleName" formControlName='middleName'
+                        class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" name="lastName" id="lastName" formControlName='lastName' class="form-control">
+                    <div class="text-danger" *ngIf='lastName.touched && lastName.invalid'>
+                        <div *ngIf='lastName.errors.required'>*This field is mandatory</div>
+                        <div *ngIf='lastName.errors.pattern'>*Last Name can only have alphabets with lenth 3-15</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="graduationDegree">Graduation Degree</label>
+                    <input type="text" name="graduationDegree" id="graduationDegree" formControlName='graduationDegree'
+                        class="form-control">
+                    <div class="text-danger" *ngIf='graduationDegree.touched && graduationDegree.invalid'>
+                        <div *ngIf='graduationDegree.errors.required'>*This field is mandatory</div>
+                        <div *ngIf='graduationDegree.errors.pattern'>*Graduation Degree can only have alphabets or
+                            dot-symbol or space with lenth 2-15</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="degreeBranch">Branch Name</label>
+                    <input type="text" name="degreeBranch" id="degreeBranch" formControlName='degreeBranch'
+                        class="form-control">
+                    <div class="text-danger" *ngIf='degreeBranch.touched && degreeBranch.invalid'>
+                        <div *ngIf='degreeBranch.errors.required'>*This field is mandatory</div>
+                        <div *ngIf='degreeBranch.errors.pattern'>*Degree Branch can only have alphabets or splace or
+                            dot-symbol with lenth 2-15</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="totalExperience">Total Experience</label>
+                    <input type="text" name="totalExperience" id="totalExperience" formControlName='totalExperience'
+                        class="form-control">
+                    <div class="text-danger" *ngIf='totalExperience.touched && totalExperience.invalid'>
+                        <div *ngIf='totalExperience.errors.required'>*This field is mandatory</div>
+                        <div *ngIf='totalExperience.errors.pattern'>*Total Experience should be a number between 0 to 50
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="relaventExperience">Relavent Experience</label>
+                    <input type="text" name="relaventExperience" id="relaventExperience"
+                        formControlName='relaventExperience' class="form-control">
+                    <div class="text-danger" *ngIf='relaventExperience.touched && relaventExperience.invalid'>
+                        <div *ngIf='relaventExperience.errors.required'>*This field is mandatory</div>
+                        <div *ngIf='relaventExperience.errors.pattern'>*Relavent Experience should be a number between 0
+                            to 50
+                        </div>
+                    </div>
+                </div>
+
+                <div formArrayName='summaries'>
+                    <div class="mb-3">
+                        <span class="h5 text-secondary">Summary</span>
+                        <button class="btn btn-outline-dark float-right" type="button" (click)='addSummary()'>Add
+                            Summary</button>
+                    </div>
+                    <div *ngFor='let control of summaries.controls; index as i'>
+                        <div class="form-group">
+                            <label for="summary{{i+1}}"> Summary {{i+1}} </label>
+                            <div class="col-md-12 mb-3">
+                                <textarea name="summary{{i+1}}" class="form-control col-md-10 float-left"
+                                    [formControlName]='i'></textarea>
+                                <button type="button" class="btn btn-secondary float-left col-md-2"
+                                    (click)='deleteSummary(i)'>
+                                    &times;
+                                </button>
+                            </div>
+                            <div class="text-danger" *ngIf='control.invalid && control.touched'>
+                                <div *ngIf=control.errors.required>
+                                    *This is a mandatory field
+                                </div>
+                                <div *ngIf=control.errors.minlength>
+                                    *Minimum 20 length is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="mb-1 float-left mt-3">
+                        <div class="h5 text-secondary">Languages</div>
+                    </div>
+                    <textarea name="languages" id="languages" formControlName='languages'
+                        class="form-control"> </textarea>
+                    <div class="text-danger" *ngIf='languages.touched && languages.invalid'>
+                        <div *ngIf='languages.errors.required'>*This field is mandatory, at least 1 language needs to be
+                            added</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="mb-1 float-left mt-3">
+                        <div class="h5 text-secondary">J2EE Technologies </div>
+                    </div>
+                    <textarea name="javaEE" id="javaEE" formControlName='javaEE' class="form-control"> </textarea>
+                    <div class="text-danger" *ngIf='javaEE.touched && javaEE.invalid'>
+                        <div *ngIf='javaEE.errors.required'>*This field is mandatory, at least 1 J2EE Technology needs
+                            to be
+                            added</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="mb-1 float-left mt-3">
+                        <div class="h5 text-secondary">Frameworks - Front End </div>
+                    </div>
+                    <textarea name="frontEndFramework" id="frontEndFramework" formControlName='frontEndFramework'
+                        class="form-control"> </textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="mb-1 float-left mt-3">
+                        <div class="h5 text-secondary">Frameworks - Back End </div>
+                    </div>
+                    <textarea name="backEndFramework" id="backEndFramework" formControlName='backEndFramework'
+                        class="form-control"> </textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="mb-1 float-left mt-3">
+                        <div class="h5 text-secondary">Design Patterns </div>
+                    </div>
+                    <textarea name="designPatterns" id="designPatterns" formControlName='designPatterns'
+                        class="form-control"> </textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="mb-1 float-left mt-3">
+                        <div class="h5 text-secondary">RDBS Applications </div>
+                    </div>
+                    <textarea name="rdbsApplications" id="rdbsApplications" formControlName='rdbsApplications'
+                        class="form-control"> </textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="mb-1 float-left mt-3">
+                        <div class="h5 text-secondary">Web Servers </div>
+                    </div>
+                    <textarea name="webServers" id="webServers" formControlName='webServers'
+                        class="form-control"> </textarea>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="mb-1 float-left mt-3">
+                        <div class="h5 text-secondary">AWS </div>
+                    </div>
+                    <textarea name="aws" id="aws" formControlName='aws' class="form-control"> </textarea>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="mb-1 float-left mt-3">
+                        <div class="h5 text-secondary">Code Quality Tools </div>
+                    </div>
+                    <textarea name="codeQualityTools" id="codeQualityTools" formControlName='codeQualityTools'
+                        class="form-control"> </textarea>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="mb-1 float-left mt-3">
+                        <div class="h5 text-secondary">Version Control System </div>
+                    </div>
+                    <textarea name="versionControlSystem" id="versionControlSystem"
+                        formControlName='versionControlSystem' class="form-control"> </textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="mb-1 float-left mt-3">
+                        <div class="h5 text-secondary">Build Automation Tool</div>
+                    </div>
+                    <textarea name="buildAutomationTool" id="buildAutomationTool" formControlName='buildAutomationTool'
+                        class="form-control"> </textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="mb-1 float-left mt-3">
+                        <div class="h5 text-secondary">CI/CD Tool </div>
+                    </div>
+                    <textarea name="cicdTool" id="cicdTool" formControlName='cicdTool' class="form-control"> </textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="mb-1 float-left mt-3">
+                        <div class="h5 text-secondary">Other Tools </div>
+                    </div>
+                    <textarea name="otherTools" id="otherTools" formControlName='otherTools'
+                        class="form-control"> </textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="mb-1 float-left mt-3">
+                        <div class="h5 text-secondary">Software Development Processes (SDLC)</div>
+                    </div>
+                    <textarea name="sdlc" id="sdlc" formControlName='sdlc' class="form-control"> </textarea>
+                </div>
+
+
+                <div formArrayName='achievements'>
+                    <div class="mb-3">
+                        <span class="h5 text-secondary">Achievements</span>
+                        <button class="btn btn-outline-dark float-right" type="button" (click)='addAchievement()'>Add
+                            Achievement</button>
+                    </div>
+                    <div *ngFor='let control of achievements.controls; index as i'>
+                        <div class="form-group">
+                            <label for="achievement{{i+1}}"> Achievement {{i+1}} </label>
+                            <div class="col-md-12 mb-3">
+                                <textarea name="achievement{{i+1}}" class="form-control col-md-10 float-left"
+                                    [formControlName]='i'></textarea>
+                                <button type="button" class="btn btn-secondary float-left col-md-2"
+                                    (click)='deleteAchievement(i)'>
+                                    &times;
+                                </button>
+                            </div>
+                            <div class="text-danger" *ngIf='control.invalid && control.touched'>
+                                <div *ngIf=control.errors.required>
+                                    *This is a mandatory field
+                                </div>
+                                <div *ngIf=control.errors.minlength>
+                                    *Minimum 10 length is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-outline-primary float-center">Submit Personal Details</button>
+            </div>
+        </div> <!-- card closing -->
+    </form>
+</div>

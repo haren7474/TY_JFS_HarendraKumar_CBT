@@ -1,0 +1,24 @@
+th {
+    color: white;
+
+}
+
+td {
+    background-color:gainsboro; 
+}
+ tr {
+    margin:58px !important;
+    padding-top: 90px;
+    background-color:grey;
+}
+.mystyle {
+    margin-top:-60px !important;
+
+}
+hr { 
+   margin: 0 !important;
+   padding:0 !important;
+    height: 1px; 
+    background: white;
+} 
+
