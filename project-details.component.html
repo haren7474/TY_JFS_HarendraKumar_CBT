@@ -1,0 +1,119 @@
+<div class='col-md-6 offset-md-3 mt-4'>
+    <form [formGroup]='projectDetailsForm' (ngSubmit)='resumePreview()'>
+        <div class="card">
+            <div class="card-header">
+                <h4>Provide below details</h4>
+            </div>
+
+            <div class="card-body">
+
+                <div formArrayName='projects'>
+                    <div class="mb-3">
+                        <span class="h5 text-secondary">Projects</span>
+                        <button class="btn btn-outline-dark float-right" type="button" (click)='addProject()'>Add
+                            Project</button>
+                    </div>
+                    <div *ngFor='let control of projects.controls; index as i'>
+                        <div class="form-group">
+                            <label for="project{{i+1}}"> Project {{i+1}} </label>
+                            <div class="col-md-12 mb-3">
+
+                                <div class="card col-md-10">
+
+                                    <div class="card-body">
+
+                                        <input type="text" name="projectName{{i+1}}" class="form-control float-left"
+                                            [formControlName]='i' placeholder="Enter Project {{i+1}} Name..">
+
+                                        <textarea name="project{{i+1}}" class="form-control float-left mt-3"
+                                            [formControlName]='i' placeholder="Enter Project {{i+1}} Summary Here..">
+                                        </textarea>
+
+                                        <input type="text" name="technologiesUsed{{i+1}}"
+                                            class="form-control float-left mt-3" [formControlName]='i'
+                                            placeholder="Enter Technologies used...">
+
+                                        <input type="text" name="designPatternsUsed{{i+1}}"
+                                            class="form-control float-left mt-3" [formControlName]='i'
+                                            placeholder="Enter Design Patterns used...">
+
+                                        <input type="text" name="rdbmsApplicationUsed{{i+1}}"
+                                            class="form-control float-left mt-3" [formControlName]='i'
+                                            placeholder="Enter RDBMS Application used...">
+
+                                        <input type="text" name="toolsUsed{{i+1}}" class="form-control float-left mt-3"
+                                            [formControlName]='i' placeholder="Enter Tools Used...">
+
+                                        <input type="text" name="teamSize{{i+1}}" class="form-control float-left mt-3"
+                                            [formControlName]='i' placeholder="Enter Team Size...">
+
+
+                                        <div formArrayName='summaries'>
+                                            <div class="mb-3">
+                                                <span class="h5 text-secondary">Summary</span>
+                                                <button class="btn btn-outline-dark float-right" type="button"
+                                                    (click)='addSummary()'>Add
+                                                    Summary</button>
+                                            </div>
+                                            <div *ngFor='let control of summaries.controls; index as i'>
+                                                <div class="form-group">
+                                                    <label for="summary{{i+1}}"> Summary {{i+1}} </label>
+                                                    <div class="col-md-12 mb-3">
+                                                        <textarea name="summary{{i+1}}"
+                                                            class="form-control col-md-10 float-left"
+                                                            [formControlName]='i'></textarea>
+                                                        <button type="button"
+                                                            class="btn btn-secondary float-left col-md-2"
+                                                            (click)='deleteSummary(i)'>
+                                                            &times;
+                                                        </button>
+                                                    </div>
+                                                    <div class="text-danger" *ngIf='control.invalid && control.touched'>
+                                                        <div *ngIf=control.errors.required>
+                                                            *This is a mandatory field
+                                                        </div>
+                                                        <div *ngIf=control.errors.minlength>
+                                                            *Minimum 20 length is required.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-secondary float-left col-md-1"
+                                    (click)='deleteProject(i)'>
+                                    &times;
+                                </button>
+                                <br>
+                            </div>
+
+
+
+                            <div class="text-danger" *ngIf='control.invalid && control.touched'>
+                                <div *ngIf=control.errors.required>
+                                    *This is a mandatory field
+                                </div>
+                                <div *ngIf=control.errors.minlength>
+                                    *Minimum 10 length is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-outline-primary float-center">Add Project Details</button>
+            </div>
+        </div> <!-- card closing -->
+    </form>
+</div>
